@@ -59,6 +59,8 @@ public class StableService {
                 oldStable.getAddress().setLocality(newStable.getAddress().getLocality());
                 oldStable.getAddress().setBuilding(newStable.getAddress().getBuilding());
                 oldStable.getAddress().setHousing(newStable.getAddress().getHousing());
+                oldStable.getAddress().setDescription(newStable.getAddress().getDescription());
+                oldStable.getAddress().setUrl(newStable.getAddress().getUrl());
 
                 repository.save(oldStable);
                 LOGGER.log(Level.INFO, "Обновление прошло успещно новое значение: {0}", Utils.toString(oldStable));

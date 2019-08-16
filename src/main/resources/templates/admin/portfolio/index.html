@@ -1,0 +1,102 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="../static/css/dropzone.css" th:href="@{/css/dropzone.css}" />
+    <title>Hello, world!</title>
+    <style>
+        * {
+          box-sizing: border-box;
+        }
+
+        body {
+          margin: 0;
+          font-family: Arial;
+        }
+
+        .header {
+          text-align: center;
+          padding: 32px;
+        }
+
+        .row-img {
+          display: -ms-flexbox; /* IE10 */
+          display: flex;
+          -ms-flex-wrap: wrap; /* IE10 */
+          flex-wrap: wrap;
+          padding: 0 4px;
+        }
+
+        /* Create four equal columns that sits next to each other */
+        .column-img {
+          -ms-flex: 25%; /* IE10 */
+          flex: 25%;
+          max-width: 25%;
+          padding: 0 4px;
+        }
+
+        .column-img img {
+          margin-top: 8px;
+          vertical-align: middle;
+          width: 100%;
+        }
+
+        /* Responsive layout - makes a two column-layout instead of four columns */
+        @media screen and (max-width: 800px) {
+          .column-img {
+            -ms-flex: 50%;
+            flex: 50%;
+            max-width: 50%;
+          }
+        }
+
+        /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+        @media screen and (max-width: 600px) {
+          .column-img {
+            -ms-flex: 100%;
+            flex: 100%;
+            max-width: 100%;
+          }
+        }
+</style>
+</head>
+<body>
+
+<div class="row-img">
+        <img th:each="photo, iter : ${photos}" th:src="'data:'+${photo.type}+';base64, '+${photo.file}" style="width:100%" />
+</div>
+
+<div id="file" class="mydropzone">
+
+</div>
+<button id="button">Click</button>
+
+
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="../static/js/dropzone.js" th:src="@{/js/dropzone.js}"></script>
+<script type="text/javascript">
+    var myDropzone = new Dropzone("div#file", {
+        url: "/upload",
+        addRemoveLinks: "true",
+        maxFiles: 2,
+        maxFilesize: 2048,
+        autoProcessQueue: false,
+        uploadMultiple: true
+    });
+    $("#button").click(function (e) {
+    e.preventDefault();
+    myDropzone.processQueue();
+});
+</script>
+</body>
+</html>

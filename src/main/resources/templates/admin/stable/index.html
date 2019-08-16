@@ -25,9 +25,9 @@
                 <tr th:each="stable : ${stables}">
                     <td th:text="${stable.name}"></td>
                     <td th:text="${'Страна: ' + stable.address.country}"></td>
-                    <td><a th:href="@{/stable/{stable.id}/portfolio}">Портфолио</a></td>
-                    <td><a th:href="@{/stable/edit/{stable.id}}">Редактировать</a></td>
-                    <td><a th:href="@{/stable/delete/{stable.id}}"></a>Удалить</td>
+                    <td><a th:href="@{'/stable/'+${stable.id}+'/portfolio'}">Портфолио</a></td>
+                    <td><a th:href="@{'/admin/stable/edit/'+${stable.id}}">Редактировать</a></td>
+                    <td><a th:href="@{'/admin/stable/delete/'+${stable.id}}">Удалить</a></td>
                 </tr>
             </tbody>
         </table>

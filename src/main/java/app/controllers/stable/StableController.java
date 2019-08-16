@@ -38,4 +38,5 @@ public class StableController {
         return "/stable/edit";
     }
 
+
 }

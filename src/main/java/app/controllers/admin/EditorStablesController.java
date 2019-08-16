@@ -48,6 +48,6 @@ public class EditorStablesController {
     @GetMapping("/admin/stable/delete/{id}")
     public String delete(@PathVariable(name = "id") Long id){
         service.delete(id);
-        return "/admin/stables";
+        return "redirect:/admin/stables";
     }
 }
