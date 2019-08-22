@@ -1,5 +1,6 @@
 package app.controllers.portfolio;
 
+import app.model.dto.PhotoDto;
 import app.repository.entity.Photo;
 import app.services.PortfolioService;
 import app.services.StableService;
@@ -33,12 +34,14 @@ public class PortfolioController {
     public String getPortfolio(@PathVariable(name = "id") Long id, Model model){
         LOGGER.log(Level.INFO, "Вызов сервиса PortfolioService");
         model.addAttribute("portfolio", service.getPortfolio(id));
+        model.addAttribute("stableId", id);
         return "/portfolio/index";
     }
 
     @PostMapping("/stable/{id}/portfolio/save")
     @ResponseBody
-    public String addPortfolio(MultipartHttpServletRequest request, @PathVariable(name = "id") Long id){
+    public List<PhotoDto> addPortfolioImages(MultipartHttpServletRequest request, @PathVariable(name = "id") Long id){
+        List<PhotoDto> photoDtos = new LinkedList<>();
         try{
             Iterator<String> itr = request.getFileNames();
             List<Photo> photos = new LinkedList<>();
@@ -52,12 +55,12 @@ public class PortfolioController {
                 photos.add(photo);
             }
             LOGGER.log(Level.INFO, "Попытка вызова сервиса PortfolioService");
-            service.savePhotos(photos, id);
+            photoDtos = service.savePhotos(photos, id);
             LOGGER.log(Level.INFO, "Сервис PortfolioService удачно отработал");
         }catch (Exception e){
             LOGGER.log(Level.SEVERE, "Ошибка вызова сервиса добавления фотографий");
         }
-        return "OK";
+        return photoDtos;
     }
 
 }

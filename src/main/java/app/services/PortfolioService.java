@@ -29,6 +29,10 @@ public class PortfolioService {
     @Qualifier("portfolioConverter")
     private DataConverter<Stable, PortfolioDto> converter;
 
+    @Autowired
+    @Qualifier("photoConverter")
+    private DataConverter<Photo, PhotoDto> photoConverter;
+
 
     public PortfolioDto getPortfolio(Long id){
         PortfolioDto portfolio = null;
@@ -44,17 +48,28 @@ public class PortfolioService {
         return portfolio;
     }
 
-    public void savePhotos(List<Photo> photos, Long id){
+    public List<PhotoDto> savePhotos(List<Photo> photos, Long id){
+        List<Photo> photoList = null;
         try{
             LOGGER.log(Level.INFO, "Получение конюшни по id");
             Stable stable = repository.getOne(id);
             stable.setPhotos(photos);
             LOGGER.log(Level.INFO, "Сохранение списка фотографий {0}", Utils.toString(photos));
-            repository.save(stable);
+            photoList = repository.save(stable).getPhotos();
             LOGGER.log(Level.INFO, "Список фотографий сохранен");
         }catch (Exception e){
             LOGGER.log(Level.SEVERE, "Ошибка сохранения фотографий: {0}", e.getMessage());
         }
+
+        return convertToPhotoDto(photoList);
+    }
+
+    private List<PhotoDto> convertToPhotoDto(List<Photo> photoList) {
+        List<PhotoDto> dtos = new LinkedList<>();
+        for (Photo photo : photoList){
+            dtos.add(photoConverter.toModel(photo));
+        }
+        return dtos;
     }
 
     public void saveVideos(List<Video> videos, Long id){

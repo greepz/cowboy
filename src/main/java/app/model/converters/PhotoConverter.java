@@ -12,6 +12,6 @@ import java.util.Base64;
 public class PhotoConverter implements DataConverter<Photo, PhotoDto> {
     @Override
     public PhotoDto toModel(Photo entity) {
-        return new PhotoDto(entity.getName(), entity.getType(), Base64.getEncoder().encodeToString(entity.getFile()));
+        return new PhotoDto(entity.getId(), entity.getName(), entity.getType(), Base64.getEncoder().encodeToString(entity.getFile()));
     }
 }

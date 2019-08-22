@@ -4,7 +4,6 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="../vendor/mdb/css/bootstrap.min.css" th:href="@{/vendor/mdb/css/bootstrap.min.css}" />
     <link rel="stylesheet" href="../vendor/mdb/css/mdb.min.css" th:href="@{/vendor/mdb/css/mdb.min.css}" />
@@ -12,10 +11,10 @@
     <title>Личный кабинет</title>
 </head>
 <body>
-    <script src="../static/vendor/mdb/js/jquery-3.4.1.min.js" th:src="@{/vendor/mdb/js/jquery-3.4.1.min.js}"></script>
-    <script src="../static/vendor/mdb/js/popper.min.js" th:src="@{/vendor/mdb/js/popper.min.js}"></script>
-    <script src="../static/vendor/mdb/js/bootstrap.min.js" th:src="@{/vendor/mdb/js/bootstrap.min.js}"></script>
-    <script src="../static/vendor/mdb/js/mdb.min.js" th:src="@{/vendor/mdb/js/mdb.min.js}"></script>
+    <div class="container-fluid">
+        <div th:replace="fragment/nav :: nav"></div>
 
+    </div>
+    <div th:replace="fragment/footer :: footer"></div>
 </body>
 </html>
