@@ -1,0 +1,14 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+    <nav th:fragment="breadcrumb" aria-label="breadcrumb">
+        <ol class="breadcrumb white">
+            <li th:each="crumb, iter : ${breadCrumbs}" class="breadcrumb-item">
+                <a th:text="${crumb.name}" th:href="${crumb.url}"></a>
+            </li>
+        </ol>
+    </nav>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../vendor/mdb/css/bootstrap.min.css" th:href="@{/vendor/mdb/css/bootstrap.min.css}" />
+    <link rel="stylesheet" href="../vendor/mdb/css/mdb.min.css" th:href="@{/vendor/mdb/css/mdb.min.css}" />
+    <link rel="stylesheet" href="../vendor/mdb/css/style.min.css" th:href="@{/vendor/mdb/css/style.min.css}" />
+
+</head>
+<body>
+    <div th:fragment="photo" class="tab-pane fade show active" id="photo" role="tabpanel" aria-labelledby="photo-tab">
+        <div style="margin-top: 2em" class="row">
+            <div class="col-12">
+                <h6>Список фотографий</h6>
+                <div class="row" id="photos">
+                    <div th:each='photo : ${portfolio.photos}' class="col-3">
+                        <img th:src="'data:'+${photo.type}+';base64, '+${photo.file}" th:alt="${photo.name}" class="img-thumbnail" /><br />
+                        <a style="text-align: center" href="#">Удалить</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="file" class="mydropzone">
+            <div class="dz-message needsclick">
+                Перетащите файлы сюда или нажмите для загрузки
+            </div>
+        </div>
+        <button style="margin-top: 2em" class="btn btn-primary" id="button">Загрузить</button>
+
+    </div>
+<script src="../static/vendor/mdb/js/jquery-3.4.1.min.js" th:src="@{/vendor/mdb/js/jquery-3.4.1.min.js}"></script>
+<script src="../static/vendor/mdb/js/popper.min.js" th:src="@{/vendor/mdb/js/popper.min.js}"></script>
+<script src="../static/vendor/mdb/js/bootstrap.min.js" th:src="@{/vendor/mdb/js/bootstrap.min.js}"></script>
+<script src="../static/vendor/mdb/js/mdb.min.js" th:src="@{/vendor/mdb/js/mdb.min.js}"></script>
+
+</body>
+</html>

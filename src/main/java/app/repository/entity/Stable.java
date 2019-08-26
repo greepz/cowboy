@@ -12,6 +12,11 @@ public class Stable {
 
     private String name;
 
+    private String url;
+
+    @Column(length = 2048)
+    private String description;
+
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "stable_id", referencedColumnName = "id")
     private List<Photo> photos;
@@ -62,5 +67,21 @@ public class Stable {
 
     public void setAddress(Address address) {
         this.address = address;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

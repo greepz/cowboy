@@ -34,6 +34,7 @@ public class PortfolioConverter implements DataConverter<Stable, PortfolioDto> {
                 photoList.add(photoConverter.toModel(photo));
             }
             portfolio.setPhotos(photoList);
+            portfolio.setStableName(entity.getName());
         }
 
         if (!entity.getVideos().isEmpty()){

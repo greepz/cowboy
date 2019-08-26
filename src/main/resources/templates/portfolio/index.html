@@ -21,7 +21,14 @@
     </head>
     <body th:id="${stableId}">
 
-        <div class="container">
+        <div th:replace="fragment/nav :: nav"></div>
+
+        <div style="margin-top:80px" class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div th:replace="fragment/breadcrumb :: breadcrumb"></div>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-12">
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -33,206 +40,36 @@
                         </li>
                     </ul>
                     <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade show active" id="photo" role="tabpanel" aria-labelledby="photo-tab">
-                            <div style="margin-top: 2em" class="row">
-                                <div class="col-12">
-                                    <h6>Список фотографий</h6>
-                                    <div class="row" id="photos">
-                                        <div th:each='photo : ${portfolio.photos}' class="col-3">
-                                            <img th:src="'data:'+${photo.type}+';base64, '+${photo.file}" th:alt="${photo.name}" class="img-thumbnail" /><br />
-                                            <a style="text-align: center" href="#">Удалить</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div id="file" class="mydropzone">
-                                <div class="dz-message needsclick">
-                                    Перетащите файлы сюда или нажмите для загрузки
-                                </div>
-                            </div>
-                            <button style="margin-top: 2em" class="btn btn-primary" id="button">Загрузить</button>
-
-                        </div>
-                        <div class="tab-pane fade" id="video" role="tabpanel" aria-labelledby="video-tab">
-                            <div style="margin-top: 2em" class="row">
-                                <div class="col-12">
-                                    <h6>Список видео</h6>
-                                    <!-- Grid row -->
-                                    <div class="row">
-
-                                        <!-- Grid column -->
-                                        <div class="col-lg-4 col-md-12 mb-4">
-
-                                            <!--Modal: Name-->
-                                            <div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog modal-lg" role="document">
-
-                                                    <!--Content-->
-                                                    <div class="modal-content">
-
-                                                        <!--Body-->
-                                                        <div class="modal-body mb-0 p-0">
-
-                                                            <div class="embed-responsive embed-responsive-16by9 z-depth-1-half">
-                                                                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/A3PDXmYoF5U"
-                                                                        allowfullscreen></iframe>
-                                                            </div>
-
-                                                        </div>
-
-                                                        <!--Footer-->
-                                                        <div class="modal-footer justify-content-center">
-                                                            <span class="mr-4">Spread the word!</span>
-                                                            <a type="button" class="btn-floating btn-sm btn-fb"><i class="fab fa-facebook-f"></i></a>
-                                                            <!--Twitter-->
-                                                            <a type="button" class="btn-floating btn-sm btn-tw"><i class="fab fa-twitter"></i></a>
-                                                            <!--Google +-->
-                                                            <a type="button" class="btn-floating btn-sm btn-gplus"><i class="fab fa-google-plus-g"></i></a>
-                                                            <!--Linkedin-->
-                                                            <a type="button" class="btn-floating btn-sm btn-ins"><i class="fab fa-linkedin-in"></i></a>
-
-                                                            <button type="button" class="btn btn-outline-primary btn-rounded btn-md ml-4" data-dismiss="modal">Close</button>
-
-                                                        </div>
-
-                                                    </div>
-                                                    <!--/.Content-->
-
-                                                </div>
-                                            </div>
-                                            <!--Modal: Name-->
-
-                                            <a><img class="img-fluid z-depth-1" src="https://mdbootstrap.com/img/screens/yt/screen-video-1.jpg" alt="video"
-                                                    data-toggle="modal" data-target="#modal1"></a>
-
-                                        </div>
-                                        <!-- Grid column -->
-
-                                        <!-- Grid column -->
-                                        <div class="col-lg-4 col-md-6 mb-4">
-
-                                            <!--Modal: Name-->
-                                            <div class="modal fade" id="modal6" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog modal-lg" role="document">
-
-                                                    <!--Content-->
-                                                    <div class="modal-content">
-
-                                                        <!--Body-->
-                                                        <div class="modal-body mb-0 p-0">
-
-                                                            <div class="embed-responsive embed-responsive-16by9 z-depth-1-half">
-                                                                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/wTcNtgA6gHs"
-                                                                        allowfullscreen></iframe>
-                                                            </div>
-
-                                                        </div>
-
-                                                        <!--Footer-->
-                                                        <div class="modal-footer justify-content-center">
-                                                            <span class="mr-4">Spread the word!</span>
-                                                            <a type="button" class="btn-floating btn-sm btn-fb"><i class="fab fa-facebook-f"></i></a>
-                                                            <!--Twitter-->
-                                                            <a type="button" class="btn-floating btn-sm btn-tw"><i class="fab fa-twitter"></i></a>
-                                                            <!--Google +-->
-                                                            <a type="button" class="btn-floating btn-sm btn-gplus"><i class="fab fa-google-plus-g"></i></a>
-                                                            <!--Linkedin-->
-                                                            <a type="button" class="btn-floating btn-sm btn-ins"><i class="fab fa-linkedin-in"></i></a>
-
-                                                            <button type="button" class="btn btn-outline-primary btn-rounded btn-md ml-4" data-dismiss="modal">Close</button>
-
-                                                        </div>
-
-                                                    </div>
-                                                    <!--/.Content-->
-
-                                                </div>
-                                            </div>
-                                            <!--Modal: Name-->
-
-                                            <a><img class="img-fluid z-depth-1" src="https://mdbootstrap.com/img/screens/yt/screen-video-2.jpg" alt="video"
-                                                    data-toggle="modal" data-target="#modal6"></a>
-
-                                        </div>
-                                        <!-- Grid column -->
-
-                                        <!-- Grid column -->
-                                        <div class="col-lg-4 col-md-6 mb-4">
-
-                                            <!--Modal: Name-->
-                                            <div class="modal fade" id="modal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog modal-lg" role="document">
-
-                                                    <!--Content-->
-                                                    <div class="modal-content">
-
-                                                        <!--Body-->
-                                                        <div class="modal-body mb-0 p-0">
-
-                                                            <div class="embed-responsive embed-responsive-16by9 z-depth-1-half">
-                                                                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/vlDzYIIOYmM"
-                                                                        allowfullscreen></iframe>
-                                                            </div>
-
-                                                        </div>
-
-                                                        <!--Footer-->
-                                                        <div class="modal-footer justify-content-center">
-                                                            <span class="mr-4">Spread the word!</span>
-                                                            <a type="button" class="btn-floating btn-sm btn-fb"><i class="fab fa-facebook-f"></i></a>
-                                                            <!--Twitter-->
-                                                            <a type="button" class="btn-floating btn-sm btn-tw"><i class="fab fa-twitter"></i></a>
-                                                            <!--Google +-->
-                                                            <a type="button" class="btn-floating btn-sm btn-gplus"><i class="fab fa-google-plus-g"></i></a>
-                                                            <!--Linkedin-->
-                                                            <a type="button" class="btn-floating btn-sm btn-ins"><i class="fab fa-linkedin-in"></i></a>
-
-                                                            <button type="button" class="btn btn-outline-primary btn-rounded btn-md ml-4" data-dismiss="modal">Close</button>
-
-                                                        </div>
-
-                                                    </div>
-                                                    <!--/.Content-->
-
-                                                </div>
-                                            </div>
-                                            <!--Modal: Name-->
-
-                                            <a><img class="img-fluid z-depth-1" src="https://mdbootstrap.com/img/screens/yt/screen-video-3.jpg" alt="video"
-                                                    data-toggle="modal" data-target="#modal4"></a>
-
-                                        </div>
-                                        <!-- Grid column -->
-
-                                    </div>
-                                    <!-- Grid row -->
-                                </div>
-                            </div>
-                        </div>
+                        <div th:replace="fragment/portfolio/photo :: photo"></div>
+                        <div th:replace="fragment/portfolio/video :: video"></div>
                     </div>
                 </div>
             </div>
         </div>
-        </div>
-
-
-
-
-        <!-- Optional JavaScript -->
-        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <!--script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script-->
         <script src="../static/js/dropzone.js" th:src="@{/js/dropzone.js}"></script>
-        <script src="../static/vendor/mdb/js/jquery-3.4.1.min.js" th:src="@{/vendor/mdb/js/jquery-3.4.1.min.js}"></script>
-        <script src="../static/vendor/mdb/js/popper.min.js" th:src="@{/vendor/mdb/js/popper.min.js}"></script>
-        <script src="../static/vendor/mdb/js/bootstrap.min.js" th:src="@{/vendor/mdb/js/bootstrap.min.js}"></script>
-        <script src="../static/vendor/mdb/js/mdb.min.js" th:src="@{/vendor/mdb/js/mdb.min.js}"></script>
+        <div th:replace="fragment/footer :: footer"></div>
         <script type="text/javascript">
             $("document").ready(function(){
+
+                $("#addVideo").click(function(e){
+                    e.preventDefault();
+                    var data = {
+                        'url': $("#video-link").val(),
+                        'name': $("#video-name").val()
+                    }
+                   $.ajax({
+                      type: 'POST',
+                      url: '/stable/'+id+'/portfolio/save/video',
+                      data: data,
+                      success: function(data){
+                       addVideo(data);
+                      }
+                    });
+                });
+
                 var id = $('body').attr('id');
                 var myDropzone = new Dropzone("div#file", {
-                    url: '/stable/'+id+'/portfolio/save',
+                    url: '/stable/'+id+'/portfolio/save/photo',
                     addRemoveLinks: "true",
                     maxFiles: 2,
                     maxFilesize: 2,
@@ -278,6 +115,13 @@
                   list.forEach(function(element){
                       $('#photos').append('<div style="margin-bottom: 2em" class="col-3"><img src="data:'+element.type+';base64, '+element.file+'" class="img-thumbnail" /><br /><a href="#">Удалить</a></div>');
                   });
+                };
+
+                function addVideo(data){
+                    $('#video-list').html('');
+                    data.forEach(function(element){
+                        $('#video-list').append('<div class="col-3"><div class="modal fade" id="modal'+element.id+'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"><div class="modal-dialog modal-lg" role="document"><div class="modal-content"><div class="modal-body mb-0 p-0"><div class="embed-responsive embed-responsive-16by9 z-depth-1-half"><iframe class="embed-responsive-item" src="https://www.youtube.com/embed/'+element.url+'" allowfullscreen></iframe></div></div><div class="modal-footer justify-content-center"><span class="mr-4">'+element.name+'</span><button type="button" class="btn btn-outline-primary btn-rounded btn-md ml-4" data-dismiss="modal">Закрыть</button></div></div></div></div><a><img class="img-fluid z-depth-1" src="https://img.youtube.com/vi/'+element.url+'/hqdefault.jpg" alt="video"data-toggle="modal" data-target="#modal'+element.id+'"></a></div>');
+                    });
                 }
             });
 

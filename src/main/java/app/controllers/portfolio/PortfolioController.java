@@ -1,7 +1,11 @@
 package app.controllers.portfolio;
 
+import app.model.dto.BreadCrumbsDto;
 import app.model.dto.PhotoDto;
+import app.model.dto.VideoDto;
 import app.repository.entity.Photo;
+import app.repository.entity.Video;
+import app.services.BreadCrumbsService;
 import app.services.PortfolioService;
 import app.services.StableService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,17 +32,25 @@ public class PortfolioController {
     @Autowired
     PortfolioService service;
 
-
+    @Autowired
+    BreadCrumbsService crumbsService;
 
     @GetMapping("/stable/{id}/portfolio")
     public String getPortfolio(@PathVariable(name = "id") Long id, Model model){
+        List<BreadCrumbsDto> breadCrumbs = crumbsService.builder()
+                .add("Главная","/")
+                .add("Конюшня", "/stable/"+id)
+                .add("Портфолио", "")
+                .build();
         LOGGER.log(Level.INFO, "Вызов сервиса PortfolioService");
         model.addAttribute("portfolio", service.getPortfolio(id));
+        model.addAttribute("breadCrumbs", breadCrumbs);
         model.addAttribute("stableId", id);
+
         return "/portfolio/index";
     }
 
-    @PostMapping("/stable/{id}/portfolio/save")
+    @PostMapping("/stable/{id}/portfolio/save/photo")
     @ResponseBody
     public List<PhotoDto> addPortfolioImages(MultipartHttpServletRequest request, @PathVariable(name = "id") Long id){
         List<PhotoDto> photoDtos = new LinkedList<>();
@@ -61,6 +73,20 @@ public class PortfolioController {
             LOGGER.log(Level.SEVERE, "Ошибка вызова сервиса добавления фотографий");
         }
         return photoDtos;
+    }
+
+    @PostMapping("/stable/{id}/portfolio/save/video")
+    @ResponseBody
+    public List<VideoDto> addPortfolioVideo(Video video, @PathVariable(name = "id") Long id){
+        List<VideoDto> dto = null;
+        try{
+            LOGGER.log(Level.INFO, "Попытка вызова сервиса PortfolioService");
+            dto = service.saveVideos(video, id);
+            LOGGER.log(Level.INFO, "Сервис PortfolioService удачно отработал");
+        }catch (Exception e){
+            LOGGER.log(Level.SEVERE, "Ошибка вызова сервиса добавления фотографий");
+        }
+        return dto;
     }
 
 }

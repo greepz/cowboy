@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="../vendor/mdb/css/bootstrap.min.css" th:href="@{/vendor/mdb/css/bootstrap.min.css}" />
+    <link rel="stylesheet" href="../vendor/mdb/css/mdb.min.css" th:href="@{/vendor/mdb/css/mdb.min.css}" />
+    <link rel="stylesheet" href="../vendor/mdb/css/style.min.css" th:href="@{/vendor/mdb/css/style.min.css}" />
+
+</head>
+<body>
+    <div th:fragment="video" class="tab-pane fade" id="video" role="tabpanel" aria-labelledby="video-tab">
+        <div style="margin-top: 2em" class="row">
+            <div class="col-12">
+                <h6>Список видео</h6>
+                <div class="row" id="video-list">
+                    <div th:each='video : ${portfolio.videos}' style="margin-bottom: 2em" class="col-3">
+                        <!--Modal: Name-->
+                        <div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg" role="document">
+                                <!--Content-->
+                                <div class="modal-content">
+                                    <!--Body-->
+                                    <div class="modal-body mb-0 p-0">
+
+                                        <div class="embed-responsive embed-responsive-16by9 z-depth-1-half">
+                                            <iframe class="embed-responsive-item" th:src="'https://www.youtube.com/embed/'+${video.url}"
+                                                    allowfullscreen></iframe>
+                                        </div>
+                                    </div>
+                                    <!--Footer-->
+                                    <div class="modal-footer justify-content-center">
+                                        <span th:text="${video.name}" class="mr-4"></span>
+                                        <button type="button" class="btn btn-outline-primary btn-rounded btn-md ml-4" data-dismiss="modal">Закрыть</button>
+                                    </div>
+                                </div>
+                                <!--/.Content-->
+                            </div>
+                        </div>
+                        <!--Modal: Name-->
+                        <a><img class="img-fluid z-depth-1" th:src="'https://img.youtube.com/vi/'+${video.url}+'/hqdefault.jpg'" alt="video"
+                                data-toggle="modal" data-target="#modal1"></a>
+                    </div>
+                </div>
+                <!-- Grid row -->
+            </div>
+        </div>
+        <form>
+            <!-- Grid row -->
+            <div class="form-row">
+                <!-- Grid column -->
+                <div class="col-5">
+                    <!-- Material input -->
+                    <div class="md-form">
+                        <input type="text" id="video-name" class="form-control" placeholder="Название видео">
+                    </div>
+                </div>
+                <div class="col-4">
+                    <!-- Material input -->
+                    <div class="md-form">
+                        <input type="text" id="video-link" class="form-control" placeholder="YouTube  видео ID">
+                    </div>
+                </div>
+                <!-- Grid column -->
+
+                <!-- Grid column -->
+                <div class="col">
+                    <!-- Material input -->
+                    <div class="md-form">
+                        <button type="button" id="addVideo" class="btn lime">Добавить видео</button>
+                    </div>
+                </div>
+                <!-- Grid column -->
+            </div>
+            <!-- Grid row -->
+        </form>
+    </div>
+
+</body>
+</html>

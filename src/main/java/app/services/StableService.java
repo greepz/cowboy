@@ -1,9 +1,12 @@
 package app.services;
 
+import app.model.converters.DataConverter;
+import app.model.dto.StableDto;
 import app.repository.StableRepository;
 import app.repository.entity.Stable;
 import app.util.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,8 +19,13 @@ public class StableService {
     @Autowired
     StableRepository repository;
 
-    public Stable findById(Long id){
-        return repository.findById(id).get();
+    @Autowired
+    @Qualifier("stableConverter")
+    DataConverter<Stable, StableDto> converter;
+
+    public StableDto findById(Long id){
+        Stable stable = repository.findById(id).get();
+        return converter.toModel(stable);
     }
 
     public List<Stable> findAll(){
@@ -59,8 +67,8 @@ public class StableService {
                 oldStable.getAddress().setLocality(newStable.getAddress().getLocality());
                 oldStable.getAddress().setBuilding(newStable.getAddress().getBuilding());
                 oldStable.getAddress().setHousing(newStable.getAddress().getHousing());
-                oldStable.getAddress().setDescription(newStable.getAddress().getDescription());
-                oldStable.getAddress().setUrl(newStable.getAddress().getUrl());
+                oldStable.setDescription(newStable.getDescription());
+                oldStable.setUrl(newStable.getUrl());
 
                 repository.save(oldStable);
                 LOGGER.log(Level.INFO, "Обновление прошло успещно новое значение: {0}", Utils.toString(oldStable));

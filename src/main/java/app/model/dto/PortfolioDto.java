@@ -8,6 +8,7 @@ public class PortfolioDto {
     private List<PhotoDto> photos;
     private List<VideoDto> videos;
     private Long stableId;
+    private String stableName;
 
     public PortfolioDto(List<PhotoDto> photos, List<VideoDto> videos, Long stableId) {
         this.photos = photos;
@@ -15,8 +16,23 @@ public class PortfolioDto {
         this.stableId = stableId;
     }
 
+    public PortfolioDto(List<PhotoDto> photos, List<VideoDto> videos, Long stableId, String stableName) {
+        this.photos = photos;
+        this.videos = videos;
+        this.stableId = stableId;
+        this.stableName = stableName;
+    }
+
     public PortfolioDto() {
 
+    }
+
+    public String getStableName() {
+        return stableName;
+    }
+
+    public void setStableName(String stableName) {
+        this.stableName = stableName;
     }
 
     public List<PhotoDto> getPhotos() {

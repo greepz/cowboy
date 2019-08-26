@@ -4,16 +4,45 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="../vendor/mdb/css/bootstrap.min.css" th:href="@{/vendor/mdb/css/bootstrap.min.css}" />
     <link rel="stylesheet" href="../vendor/mdb/css/mdb.min.css" th:href="@{/vendor/mdb/css/mdb.min.css}" />
     <link rel="stylesheet" href="../vendor/mdb/css/style.min.css" th:href="@{/vendor/mdb/css/style.min.css}" />
-    <title>Личный кабинет</title>
+    <link rel="stylesheet" href="../static/css/dropzone.css" th:href="@{/css/dropzone.css}" />
+    <title>Hello, world!</title>
 </head>
-<body>
-    <div class="container-fluid">
-        <div th:replace="fragment/nav :: nav"></div>
+<body th:id="${stableId}">
 
+<div th:replace="fragment/nav :: nav"></div>
+
+    <div style="margin-top:80px" class="container">
+        <div class="row">
+            <div class="col-12">
+                <div th:replace="fragment/breadcrumb :: breadcrumb"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <article class="article">
+                    <h2 th:text="${stable.name}" class="article__title"></h2>
+                    <div th:text="${stable.fullAddress}" class="article__date">2017/12/21</div>
+                    <div th:text="${stable.description}" class="article__content"></div>
+                    <div><a th:href="@{/stable/{id}/portfolio(id=${stable.id})}">Портфолио</a></div>
+                    <div>Ваши предложения</div>
+                    <div><a href="#">Создать новое предложение</a></div>
+                    <div id="map-container-google-1" class="z-depth-1-half map-container" style="height: 500px">
+                        <iframe th:src="${stable.url}" frameborder="0"
+                                style="border:0" allowfullscreen></iframe>
+                    </div>
+                </article>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+
+            </div>
+        </div>
     </div>
     <div th:replace="fragment/footer :: footer"></div>
 </body>

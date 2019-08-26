@@ -5,13 +5,17 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="../vendor/mdb/css/bootstrap.min.css" th:href="@{/vendor/mdb/css/bootstrap.min.css}" />
+    <link rel="stylesheet" href="../vendor/mdb/css/mdb.min.css" th:href="@{/vendor/mdb/css/mdb.min.css}" />
+    <link rel="stylesheet" href="../vendor/mdb/css/style.min.css" th:href="@{/vendor/mdb/css/style.min.css}" />
+    <link rel="stylesheet" href="../static/css/dropzone.css" th:href="@{/css/dropzone.css}" />
 </head>
 <body>
-
-    <div class="container">
-        <div><div class="col-12"><a th:href="@{/admin/stable/add}" class="btn btn-primary">Добавить конюшню</a></div> </div>
+    <div class="container-fluid">
+        <div th:replace="fragment/nav :: nav"></div>
+    </div>
+    <div style="margin-top:70px" class="container">
+        <div class="row"><div class="col-12"><a th:href="@{/admin/stable/add}" class="btn btn-primary">Добавить конюшню</a></div> </div>
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -24,7 +28,7 @@
             <tbody>
                 <tr th:each="stable : ${stables}">
                     <td th:text="${stable.name}"></td>
-                    <td th:text="${'Страна: ' + stable.address.country}"></td>
+                    <td th:text="${stable.fullAddress}"></td>
                     <td><a th:href="@{'/stable/'+${stable.id}+'/portfolio'}">Портфолио</a></td>
                     <td><a th:href="@{'/admin/stable/edit/'+${stable.id}}">Редактировать</a></td>
                     <td><a th:href="@{'/admin/stable/delete/'+${stable.id}}">Удалить</a></td>
@@ -33,11 +37,6 @@
         </table>
     </div>
 
-
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <div th:replace="fragment/footer :: footer"></div>
 </body>
 </html>

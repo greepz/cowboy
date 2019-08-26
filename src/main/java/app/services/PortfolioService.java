@@ -3,6 +3,7 @@ package app.services;
 import app.model.converters.DataConverter;
 import app.model.dto.PhotoDto;
 import app.model.dto.PortfolioDto;
+import app.model.dto.VideoDto;
 import app.repository.PhotoRepository;
 import app.repository.StableRepository;
 import app.repository.entity.Photo;
@@ -32,6 +33,10 @@ public class PortfolioService {
     @Autowired
     @Qualifier("photoConverter")
     private DataConverter<Photo, PhotoDto> photoConverter;
+
+    @Autowired
+    @Qualifier("videoConverter")
+    private DataConverter<Video, VideoDto> videoConverter;
 
 
     public PortfolioDto getPortfolio(Long id){
@@ -72,17 +77,27 @@ public class PortfolioService {
         return dtos;
     }
 
-    public void saveVideos(List<Video> videos, Long id){
+    private List<VideoDto> convertToVideoDto(List<Video> videoList) {
+        List<VideoDto> dtos = new LinkedList<>();
+        for (Video video : videoList){
+            dtos.add(videoConverter.toModel(video));
+        }
+        return dtos;
+    }
+
+    public List<VideoDto> saveVideos(Video video, Long id){
+        List<Video> list = null;
         try{
             LOGGER.log(Level.INFO, "Получение конюшни по id");
             Stable stable = repository.getOne(id);
-            stable.setVideos(videos);
-            LOGGER.log(Level.INFO, "Сохранение списка ссылок на видео {0}", Utils.toString(videos));
-            repository.save(stable);
-            LOGGER.log(Level.INFO, "Список видео ссылок сохранен");
+            stable.getVideos().add(video);
+            LOGGER.log(Level.INFO, "Сохранение ссылки на видео {0}", Utils.toString(video));
+            list = repository.save(stable).getVideos();
+            LOGGER.log(Level.INFO, "Ссылка на видео сохранена");
         }catch (Exception e){
-            LOGGER.log(Level.INFO, "Ошибка сохранения видео ссылок: {0}", e.getMessage());
+            LOGGER.log(Level.INFO, "Ошибка сохранения ссылки на видео: {0}", e.getMessage());
         }
+        return convertToVideoDto(list);
     }
 
 
